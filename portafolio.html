@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portafolio — Dreamtech.software</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #06070D;
+    --bg2: #0A0C18;
+    --bg3: #0E1020;
+    --neon-blue: #4D6BFF;
+    --neon-cyan: #00D4FF;
+    --green-neon: #00FFB2;
+    --white: #EEF0FF;
+    --gray: rgba(238,240,255,0.45);
+    --border: rgba(77,107,255,0.16);
+    --border-cyan: rgba(0,212,255,0.25);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--white); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 18px 64px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(6,7,13,0.9); backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-sym { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+  .nd-top { width: 12px; height: 12px; background: var(--neon-cyan); border-radius: 50%; box-shadow: 0 0 12px var(--neon-cyan); }
+  .nd-row { display: flex; gap: 4px; }
+  .nd-bot { width: 12px; height: 12px; background: rgba(238,240,255,0.85); border-radius: 50%; }
+  .nav-wordmark { font-size: 18px; font-weight: 800; color: var(--white); letter-spacing: -0.025em; }
+  .nav-wordmark span { color: var(--neon-cyan); }
+  .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+  .nav-links a { font-size: 12px; font-weight: 600; color: rgba(238,240,255,0.45); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--neon-cyan); }
+  .nav-btn { background: transparent; border: 1.5px solid var(--neon-cyan); color: var(--neon-cyan) !important; padding: 9px 20px; border-radius: 7px; cursor: pointer; transition: background 0.2s, box-shadow 0.2s; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; }
+  .nav-btn:hover { background: rgba(0,212,255,0.08) !important; box-shadow: 0 0 22px rgba(0,212,255,0.2); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; gap: 60px;
+    padding: 140px 64px 80px; position: relative; overflow: hidden;
+  }
+  .hero-grid-bg { position: absolute; inset: 0; background-image: linear-gradient(rgba(77,107,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(77,107,255,0.03) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+  .hero-glow-tl { position: absolute; width: 800px; height: 800px; background: radial-gradient(circle, rgba(77,107,255,0.09) 0%, transparent 60%); top: -200px; right: -200px; pointer-events: none; }
+  .hero-glow-bl { position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, rgba(0,212,255,0.06) 0%, transparent 60%); bottom: -100px; left: -100px; pointer-events: none; }
+
+  .hero-left { position: relative; opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--neon-cyan); margin-bottom: 28px; }
+  .hero-eyebrow::before { content: ''; width: 30px; height: 1.5px; background: var(--neon-cyan); box-shadow: 0 0 8px var(--neon-cyan); }
+  .hero-title { font-size: clamp(42px, 5vw, 72px); font-weight: 800; line-height: 1.05; letter-spacing: -0.035em; margin-bottom: 24px; }
+  .hero-title .tc { color: var(--neon-cyan); }
+  .hero-title .tg { color: var(--green-neon); }
+  .hero-sub { font-size: 17px; font-weight: 400; color: var(--gray); line-height: 1.75; margin-bottom: 44px; max-width: 460px; }
+  .hero-actions { display: flex; gap: 14px; margin-bottom: 56px; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--neon-blue); color: #fff; font-size: 14px; font-weight: 700; padding: 14px 28px; border-radius: 9px; text-decoration: none; box-shadow: 0 0 32px rgba(77,107,255,0.38); transition: transform 0.2s, box-shadow 0.2s; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 52px rgba(77,107,255,0.55); }
+  .btn-ghost { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--neon-cyan); font-size: 14px; font-weight: 700; padding: 14px 28px; border-radius: 9px; border: 1.5px solid var(--neon-cyan); text-decoration: none; transition: transform 0.2s, background 0.2s, box-shadow 0.2s; }
+  .btn-ghost:hover { transform: translateY(-2px); background: rgba(0,212,255,0.07); box-shadow: 0 0 28px rgba(0,212,255,0.16); }
+
+  /* STATS */
+  .hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--border); border-radius: 16px; background: rgba(10,12,24,0.9); backdrop-filter: blur(12px); overflow: hidden; opacity: 0; animation: fadeUp 0.8s ease forwards 0.9s; }
+  .stat { padding: 20px 20px; border-right: 1px solid var(--border); text-align: center; }
+  .stat:last-child { border-right: none; }
+  .stat-num { font-size: 32px; font-weight: 800; color: var(--neon-cyan); line-height: 1; text-shadow: 0 0 18px rgba(0,212,255,0.45); letter-spacing: -0.03em; }
+  .stat-lbl { font-size: 10px; font-weight: 600; color: rgba(238,240,255,0.3); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 5px; }
+
+  /* HERO VISUAL */
+  .hero-right { position: relative; opacity: 0; animation: fadeUp 0.8s ease forwards 0.5s; display: flex; align-items: center; justify-content: center; }
+  .hero-visual-wrap { position: relative; width: 100%; max-width: 520px; }
+
+  /* Central SVG visual */
+  .hero-svg-container { position: relative; width: 100%; padding-bottom: 85%; }
+  .hero-svg-container svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  /* Floating cards */
+  .float-card { position: absolute; background: rgba(10,12,24,0.92); border: 1px solid var(--border-cyan); border-radius: 12px; padding: 12px 16px; backdrop-filter: blur(16px); box-shadow: 0 0 30px rgba(0,212,255,0.08); }
+  .float-card-1 { top: 8%; left: -8%; animation: floatY 4s ease-in-out infinite; }
+  .float-card-2 { bottom: 12%; right: -6%; animation: floatY 4s ease-in-out infinite 2s; }
+  .float-card-3 { top: 42%; right: -10%; animation: floatY 3.5s ease-in-out infinite 1s; }
+  .fc-label { font-size: 10px; font-weight: 600; color: rgba(238,240,255,0.4); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+  .fc-val { font-size: 18px; font-weight: 800; color: var(--neon-cyan); letter-spacing: -0.02em; }
+  .fc-sub { font-size: 10px; color: rgba(238,240,255,0.35); margin-top: 2px; }
+  .fc-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green-neon); box-shadow: 0 0 8px var(--green-neon); display: inline-block; margin-right: 6px; }
+
+  /* QUOTE */
+  .quote-sec { padding: 72px 64px; }
+  .quote-card { background: linear-gradient(135deg, rgba(26,31,110,0.3) 0%, rgba(10,12,24,0.9) 100%); border: 1px solid rgba(77,107,255,0.22); border-radius: 22px; padding: 56px 64px; text-align: center; position: relative; overflow: hidden; }
+  .quote-card::after { content:''; position:absolute; width:400px; height:400px; background:radial-gradient(circle, rgba(0,212,255,0.05) 0%, transparent 65%); top:-80px; right:-80px; pointer-events:none; }
+  .quote-txt { font-size: clamp(18px, 2.2vw, 30px); font-weight: 700; line-height: 1.35; letter-spacing: -0.02em; color: var(--white); max-width: 740px; margin: 0 auto 14px; }
+  .quote-txt span { color: var(--neon-cyan); }
+  .quote-sub { font-size: 15px; font-weight: 400; color: rgba(238,240,255,0.38); }
+
+  /* PROJECTS */
+  .projects-sec { padding: 80px 64px; }
+  .sec-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--neon-cyan); margin-bottom: 14px; }
+  .sec-eyebrow::before { content:''; width:22px; height:1.5px; background:var(--neon-cyan); }
+  .sec-title { font-size: clamp(26px, 3.5vw, 46px); font-weight: 800; letter-spacing: -0.025em; line-height: 1.05; margin-bottom: 12px; }
+  .sec-title span { color: var(--neon-cyan); }
+  .sec-desc { font-size: 15px; font-weight: 400; color: var(--gray); max-width: 500px; line-height: 1.75; margin-bottom: 52px; }
+
+  .pcard { background: var(--bg2); border: 1px solid var(--border); border-radius: 22px; overflow: hidden; margin-bottom: 28px; opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease, border-color 0.3s, box-shadow 0.3s; }
+  .pcard:hover { border-color: rgba(0,212,255,0.32); box-shadow: 0 0 60px rgba(0,212,255,0.05); }
+  .pcard.visible { opacity: 1; transform: translateY(0); }
+  .pinner { display: grid; grid-template-columns: 1fr 1fr; min-height: 400px; }
+  .pinner.rev { direction: rtl; }
+  .pinner.rev > * { direction: ltr; }
+  .pvisual { position: relative; overflow: hidden; min-height: 360px; }
+  .pvbg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 36px; }
+
+  /* Mock browser */
+  .mock { width: 100%; max-width: 300px; background: #09091A; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 24px 80px rgba(0,0,0,0.7); }
+  .mbar { background: #11122A; padding: 9px 12px; display: flex; align-items: center; gap: 5px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .md { width: 8px; height: 8px; border-radius: 50%; }
+  .mr{background:#FF5F57;} .my{background:#FEBC2E;} .mg{background:#28C840;}
+  .murl { flex:1; height:16px; background:rgba(255,255,255,0.04); border-radius:4px; margin-left:6px; font-size:8px; color:rgba(255,255,255,0.22); display:flex; align-items:center; padding:0 8px; font-family:monospace; }
+  .mbody { padding: 14px; }
+  .mhero { height: 64px; border-radius: 8px; margin-bottom: 10px; display: flex; align-items: center; padding: 0 14px; }
+  .mhtxt { font-size: 9px; font-weight: 700; color: #fff; letter-spacing: 0.04em; }
+  .mgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; margin-bottom: 8px; }
+  .mc { height: 40px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.04); }
+  .mrows { display: flex; flex-direction: column; gap: 5px; }
+  .mrow { height: 24px; border-radius: 6px; background: rgba(255,255,255,0.03); display: flex; align-items: center; padding: 0 10px; gap: 7px; border: 1px solid rgba(255,255,255,0.04); }
+  .mri { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .mrb { flex: 1; height: 4px; border-radius: 2px; background: rgba(255,255,255,0.07); }
+
+  .gov-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(0,255,178,0.07); border:1px solid rgba(0,255,178,0.22); color:var(--green-neon); font-size:11px; font-weight:700; padding:5px 12px; border-radius:20px; margin-bottom:14px; box-shadow:0 0 16px rgba(0,255,178,0.07); }
+  .pinfo { padding: 44px; display: flex; flex-direction: column; justify-content: center; }
+  .ptag { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--neon-cyan); margin-bottom:14px; }
+  .ptag::before { content:''; width:14px; height:1.5px; background:var(--neon-cyan); }
+  .ptitle { font-size: 26px; font-weight: 800; line-height: 1.15; letter-spacing: -0.025em; color: var(--white); margin-bottom: 6px; }
+  .pclient { font-size: 11px; font-weight: 600; color: rgba(238,240,255,0.28); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 18px; }
+  .pdesc { font-size: 14px; font-weight: 400; color: rgba(238,240,255,0.52); line-height: 1.78; margin-bottom: 22px; }
+  .presults { display: flex; flex-direction: column; gap: 9px; margin-bottom: 28px; }
+  .pr { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: rgba(238,240,255,0.68); line-height: 1.5; }
+  .prdot { width: 5px; height: 5px; border-radius: 50%; background: var(--neon-cyan); box-shadow: 0 0 6px var(--neon-cyan); flex-shrink: 0; margin-top: 7px; }
+  .plinks { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btnp { display:inline-flex; align-items:center; gap:7px; background:rgba(77,107,255,0.1); border:1px solid rgba(77,107,255,0.32); color:var(--white); font-size:13px; font-weight:700; padding:11px 18px; border-radius:9px; text-decoration:none; transition:background 0.2s, border-color 0.2s, box-shadow 0.2s; }
+  .btnp:hover { background:rgba(77,107,255,0.2); border-color:var(--neon-blue); box-shadow:0 0 18px rgba(77,107,255,0.16); }
+
+  /* SERVICES */
+  .svc-sec { background: var(--bg2); padding: 80px 64px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .sgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .scard { background: var(--bg3); border: 1px solid var(--border); border-radius: 16px; padding: 26px; transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s; position: relative; overflow: hidden; }
+  .scard::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, var(--neon-cyan), transparent); opacity:0; transition:opacity 0.3s; }
+  .scard:hover { border-color:rgba(0,212,255,0.26); box-shadow:0 0 36px rgba(0,212,255,0.05); transform:translateY(-4px); }
+  .scard:hover::before { opacity:1; }
+  .sicon { width:42px; height:42px; background:rgba(77,107,255,0.1); border:1px solid rgba(77,107,255,0.22); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:19px; margin-bottom:18px; }
+  .sname { font-size: 15px; font-weight: 800; color: var(--white); margin-bottom: 8px; letter-spacing: -0.01em; }
+  .sdesc { font-size: 13px; font-weight: 400; color: rgba(238,240,255,0.38); line-height: 1.65; margin-bottom: 18px; }
+  .sprice { font-size: 14px; font-weight: 800; color: var(--neon-cyan); text-shadow: 0 0 10px rgba(0,212,255,0.32); }
+  .slink { display:inline-flex; align-items:center; gap:4px; font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:rgba(0,212,255,0.45); text-decoration:none; margin-top:14px; transition:color 0.2s; }
+  .slink:hover { color:var(--neon-cyan); }
+
+  .gdiv { height: 1px; background: linear-gradient(90deg, transparent, rgba(0,212,255,0.22), transparent); margin: 0 64px; }
+
+  /* CTA */
+  .cta-sec { padding: 100px 64px; text-align: center; position: relative; }
+  .cta-glow { position:absolute; width:600px; height:300px; background:radial-gradient(ellipse, rgba(77,107,255,0.08) 0%, transparent 70%); top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none; }
+  .cta-title { font-size: clamp(26px, 4vw, 50px); font-weight: 800; line-height: 1.1; letter-spacing: -0.025em; color: var(--white); margin-bottom: 14px; position: relative; }
+  .cta-title span { color: var(--neon-cyan); }
+  .cta-sub { font-size: 16px; font-weight: 400; color: var(--gray); margin-bottom: 40px; max-width: 460px; margin-left: auto; margin-right: auto; line-height: 1.75; position: relative; }
+  .cta-btns { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; position:relative; }
+
+  /* FOOTER */
+  footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 44px 64px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 32px; }
+  .fbrand { font-size: 18px; font-weight: 800; color: var(--white); letter-spacing: -0.02em; }
+  .fbrand span { color: var(--neon-cyan); }
+  .ftagline { font-size: 12px; font-weight: 400; color: rgba(238,240,255,0.28); margin-top: 4px; }
+  .fcopy { font-size: 11px; color: rgba(238,240,255,0.18); text-align: center; letter-spacing: 0.04em; }
+  .fcontact { text-align: right; font-size: 12px; color: rgba(238,240,255,0.32); line-height: 1.85; }
+  .fcontact a { color: var(--neon-cyan); text-decoration: none; }
+
+  @keyframes fadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes floatY { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
+  @keyframes pulse-ring { 0%,100% { opacity:0.4; transform:scale(1); } 50% { opacity:0.8; transform:scale(1.04); } }
+  @keyframes rotate-slow { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
+  @keyframes dash { to { stroke-dashoffset: 0; } }
+
+  @media (max-width: 1000px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 110px 20px 60px; gap: 40px; }
+    .hero-right { display: none; }
+    .hero-stats { grid-template-columns: repeat(2,1fr); }
+    .projects-sec, .quote-sec, .svc-sec, .cta-sec { padding: 64px 20px; }
+    .pinner, .pinner.rev { grid-template-columns: 1fr; direction: ltr; }
+    .pvisual { min-height: 240px; }
+    .pinfo { padding: 28px 20px; }
+    .sgrid { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr; padding: 36px 20px; }
+    .fcontact { text-align: left; }
+    .gdiv { margin: 0 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-sym">
+      <div class="nd-top"></div>
+      <div class="nd-row"><div class="nd-bot"></div><div class="nd-bot"></div></div>
+    </div>
+    <div class="nav-wordmark">Dream<span>tech</span>.software</div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#proyectos">Proyectos</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="https://wa.link/v4dh9e" target="_blank" class="nav-btn">AGENDAR REUNIÓN</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow-tl"></div>
+  <div class="hero-glow-bl"></div>
+
+  <div class="hero-left">
+    <div class="hero-eyebrow">Portafolio de proyectos · Dreamtech.software</div>
+    <h1 class="hero-title">
+      Construimos<br>
+      tu <span class="tc">presencia.</span><br>
+      Tú construyes<br>
+      tu <span class="tg">negocio.</span>
+    </h1>
+    <p class="hero-sub">Aliados estratégicos para emprendedores colombianos. Documentación, seguimiento y resultados reales desde el día uno.</p>
+    <div class="hero-actions">
+      <a href="#proyectos" class="btn-primary">Ver proyectos →</a>
+      <a href="https://wa.link/v4dh9e" target="_blank" class="btn-ghost">💬 Hablemos</a>
+    </div>
+    <div class="hero-stats" id="stats">
+      <div class="stat"><div class="stat-num" data-target="30" data-suffix="+">0</div><div class="stat-lbl">Aplicaciones<br>construidas</div></div>
+      <div class="stat"><div class="stat-num" data-target="15" data-suffix="+">0</div><div class="stat-lbl">Proyectos<br>destacados</div></div>
+      <div class="stat"><div class="stat-num" data-target="5" data-suffix="+">0</div><div class="stat-lbl">Años<br>construyendo</div></div>
+      <div class="stat"><div class="stat-num" data-target="100" data-suffix="%">0</div><div class="stat-lbl">Siempre<br>documentado</div></div>
+    </div>
+  </div>
+
+  <!-- HERO VISUAL -->
+  <div class="hero-right">
+    <div class="hero-visual-wrap">
+      <div class="hero-svg-container">
+        <svg viewBox="0 0 480 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="bgGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#4D6BFF" stop-opacity="0.12"/>
+              <stop offset="100%" stop-color="#4D6BFF" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="3" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <filter id="softglow">
+              <feGaussianBlur stdDeviation="6" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <linearGradient id="lineGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#00D4FF" stop-opacity="0"/>
+              <stop offset="50%" stop-color="#00D4FF" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#00FFB2" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="lineGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#4D6BFF" stop-opacity="0"/>
+              <stop offset="50%" stop-color="#4D6BFF" stop-opacity="0.6"/>
+              <stop offset="100%" stop-color="#00D4FF" stop-opacity="0"/>
+            </linearGradient>
+            <clipPath id="hexClip">
+              <polygon points="240,40 360,110 360,250 240,320 120,250 120,110"/>
+            </clipPath>
+          </defs>
+
+          <!-- Background glow -->
+          <ellipse cx="240" cy="200" rx="200" ry="170" fill="url(#bgGlow)"/>
+
+          <!-- Outer rotating ring -->
+          <g style="transform-origin: 240px 180px; animation: rotate-slow 18s linear infinite;">
+            <circle cx="240" cy="180" r="150" stroke="rgba(77,107,255,0.12)" stroke-width="1" fill="none" stroke-dasharray="8 12"/>
+          </g>
+
+          <!-- Second ring -->
+          <g style="transform-origin: 240px 180px; animation: rotate-slow 12s linear infinite reverse;">
+            <circle cx="240" cy="180" r="115" stroke="rgba(0,212,255,0.1)" stroke-width="1" fill="none" stroke-dasharray="4 16"/>
+          </g>
+
+          <!-- Central hexagon shape -->
+          <polygon points="240,70 320,116 320,208 240,254 160,208 160,116" fill="rgba(13,15,32,0.95)" stroke="rgba(77,107,255,0.35)" stroke-width="1.5" filter="url(#glow)"/>
+
+          <!-- Inner hex glow -->
+          <polygon points="240,70 320,116 320,208 240,254 160,208 160,116" fill="none" stroke="rgba(0,212,255,0.15)" stroke-width="8"/>
+
+          <!-- Central icon: 3 connected circles (Dreamtech logo concept) -->
+          <circle cx="240" cy="148" r="22" fill="rgba(0,212,255,0.12)" stroke="#00D4FF" stroke-width="1.5" filter="url(#glow)"/>
+          <circle cx="212" cy="196" r="22" fill="rgba(77,107,255,0.12)" stroke="#4D6BFF" stroke-width="1.5" filter="url(#glow)"/>
+          <circle cx="268" cy="196" r="22" fill="rgba(0,255,178,0.1)" stroke="#00FFB2" stroke-width="1.5" filter="url(#glow)"/>
+
+          <!-- Connection lines between circles -->
+          <line x1="228" y1="166" x2="221" y2="178" stroke="url(#lineGrad1)" stroke-width="1.5"/>
+          <line x1="252" y1="166" x2="258" y2="178" stroke="url(#lineGrad1)" stroke-width="1.5"/>
+          <line x1="234" y1="196" x2="246" y2="196" stroke="url(#lineGrad2)" stroke-width="1.5"/>
+
+          <!-- Dots inside circles -->
+          <circle cx="240" cy="148" r="6" fill="#00D4FF" filter="url(#softglow)"/>
+          <circle cx="212" cy="196" r="6" fill="#4D6BFF" filter="url(#softglow)"/>
+          <circle cx="268" cy="196" r="6" fill="#00FFB2" filter="url(#softglow)"/>
+
+          <!-- Connection lines to nodes -->
+          <!-- Node: Tecnología -->
+          <line x1="240" y1="126" x2="240" y2="88" stroke="rgba(0,212,255,0.3)" stroke-width="1" stroke-dasharray="3 4"/>
+          <circle cx="240" cy="80" r="6" fill="rgba(0,212,255,0.15)" stroke="#00D4FF" stroke-width="1.2"/>
+          <text x="240" y="64" fill="rgba(0,212,255,0.75)" font-size="9" font-weight="700" text-anchor="middle" letter-spacing="0.08em" font-family="Plus Jakarta Sans, sans-serif">TECNOLOGÍA</text>
+
+          <!-- Node: Alianza -->
+          <line x1="192" y1="196" x2="152" y2="196" stroke="rgba(77,107,255,0.3)" stroke-width="1" stroke-dasharray="3 4"/>
+          <circle cx="144" cy="196" r="6" fill="rgba(77,107,255,0.15)" stroke="#4D6BFF" stroke-width="1.2"/>
+          <text x="108" y="192" fill="rgba(77,107,255,0.75)" font-size="9" font-weight="700" text-anchor="middle" letter-spacing="0.08em" font-family="Plus Jakarta Sans, sans-serif">ALIANZA</text>
+          <text x="108" y="204" fill="rgba(77,107,255,0.75)" font-size="9" font-weight="700" text-anchor="middle" letter-spacing="0.08em" font-family="Plus Jakarta Sans, sans-serif">ESTRATÉGICA</text>
+
+          <!-- Node: Confianza -->
+          <line x1="288" y1="196" x2="328" y2="196" stroke="rgba(0,255,178,0.3)" stroke-width="1" stroke-dasharray="3 4"/>
+          <circle cx="336" cy="196" r="6" fill="rgba(0,255,178,0.12)" stroke="#00FFB2" stroke-width="1.2"/>
+          <text x="372" y="192" fill="rgba(0,255,178,0.7)" font-size="9" font-weight="700" text-anchor="middle" letter-spacing="0.08em" font-family="Plus Jakarta Sans, sans-serif">CONFIANZA</text>
+          <text x="372" y="204" fill="rgba(0,255,178,0.7)" font-size="9" font-weight="700" text-anchor="middle" letter-spacing="0.08em" font-family="Plus Jakarta Sans, sans-serif">REAL</text>
+
+          <!-- Node: Resultados (bottom) -->
+          <line x1="240" y1="254" x2="240" y2="290" stroke="rgba(0,212,255,0.2)" stroke-width="1" stroke-dasharray="3 4"/>
+          <circle cx="240" cy="298" r="6" fill="rgba(0,212,255,0.1)" stroke="#00D4FF" stroke-width="1.2"/>
+          <text x="240" y="316" fill="rgba(0,212,255,0.6)" font-size="9" font-weight="700" text-anchor="middle" letter-spacing="0.08em" font-family="Plus Jakarta Sans, sans-serif">RESULTADOS</text>
+
+          <!-- Floating particles -->
+          <circle cx="80" cy="100" r="2.5" fill="#00D4FF" opacity="0.5" style="animation: pulse-ring 3s ease-in-out infinite;"/>
+          <circle cx="400" cy="120" r="2" fill="#4D6BFF" opacity="0.4" style="animation: pulse-ring 3.5s ease-in-out infinite 1s;"/>
+          <circle cx="60" cy="270" r="2" fill="#00FFB2" opacity="0.4" style="animation: pulse-ring 4s ease-in-out infinite 0.5s;"/>
+          <circle cx="420" cy="280" r="2.5" fill="#00D4FF" opacity="0.5" style="animation: pulse-ring 2.8s ease-in-out infinite 1.5s;"/>
+          <circle cx="160" cy="50" r="1.5" fill="#4D6BFF" opacity="0.35" style="animation: pulse-ring 3.2s ease-in-out infinite 0.8s;"/>
+          <circle cx="340" cy="340" r="2" fill="#00FFB2" opacity="0.3" style="animation: pulse-ring 3.8s ease-in-out infinite 2s;"/>
+
+          <!-- Corner markers -->
+          <rect x="32" y="32" width="12" height="2" fill="rgba(0,212,255,0.3)"/>
+          <rect x="32" y="32" width="2" height="12" fill="rgba(0,212,255,0.3)"/>
+          <rect x="436" y="32" width="12" height="2" fill="rgba(0,212,255,0.3)"/>
+          <rect x="446" y="32" width="2" height="12" fill="rgba(0,212,255,0.3)"/>
+          <rect x="32" y="356" width="12" height="2" fill="rgba(0,212,255,0.3)"/>
+          <rect x="32" y="346" width="2" height="12" fill="rgba(0,212,255,0.3)"/>
+          <rect x="436" y="356" width="12" height="2" fill="rgba(0,212,255,0.3)"/>
+          <rect x="446" y="346" width="2" height="12" fill="rgba(0,212,255,0.3)"/>
+        </svg>
+      </div>
+
+      <!-- Floating cards -->
+      <div class="float-card float-card-1">
+        <div class="fc-label">Estado del proyecto</div>
+        <div class="fc-val"><span class="fc-dot"></span>En ejecución</div>
+        <div class="fc-sub">Roadmap activo · semana 2</div>
+      </div>
+      <div class="float-card float-card-2">
+        <div class="fc-label">Documentación</div>
+        <div class="fc-val">100%</div>
+        <div class="fc-sub">Propuesta · contrato · hitos</div>
+      </div>
+      <div class="float-card float-card-3">
+        <div class="fc-label">Próxima reunión</div>
+        <div class="fc-val">Viernes 3PM</div>
+        <div class="fc-sub">Revisión avance 70%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-sec">
+  <div class="quote-card">
+    <div class="quote-txt">Creemos que el emprendedor colombiano merece un aliado tecnológico de <span>confianza real</span>, no un proveedor que entrega y desaparece.</div>
+    <div class="quote-sub">En Dreamtech acompañamos cada proyecto con proceso, estrategia y resultados medibles.</div>
+  </div>
+</section>
+
+<!-- PROYECTOS -->
+<section class="projects-sec" id="proyectos">
+  <div class="sec-eyebrow">Proyectos destacados</div>
+  <h2 class="sec-title">Lo que hemos <span>construido</span></h2>
+  <p class="sec-desc">Cada proyecto es una alianza real. Roadmap, documentación y seguimiento desde el inicio hasta los resultados.</p>
+
+  <!-- Asoreamb -->
+  <div class="pcard" id="p1">
+    <div class="pinner">
+      <div class="pvisual" style="background: linear-gradient(135deg, #020F08, #061F14, #0A3324);">
+        <div class="pvbg">
+          <div class="mock" style="max-width:270px;">
+            <div class="mbar"><div class="md mr"></div><div class="md my"></div><div class="md mg"></div><div class="murl">App Móvil · Asoreamb ♻</div></div>
+            <div class="mbody">
+              <div class="mhero" style="background: linear-gradient(90deg, #0A3324, #1D9E75); box-shadow: 0 0 28px rgba(29,158,117,0.25);"><div class="mhtxt">♻ ASOREAMB — RECICLAJE INTELIGENTE</div></div>
+              <div class="mrows">
+                <div class="mrow"><div class="mri" style="background:#00FFB2; box-shadow:0 0 5px #00FFB2;"></div><div class="mrb" style="background:rgba(0,255,178,0.14);"></div></div>
+                <div class="mrow"><div class="mri" style="background:#1D9E75;"></div><div class="mrb" style="width:70%;background:rgba(29,158,117,0.11);"></div></div>
+                <div class="mrow"><div class="mri" style="background:#00FFB2; box-shadow:0 0 5px #00FFB2;"></div><div class="mrb" style="width:85%;background:rgba(0,255,178,0.14);"></div></div>
+                <div class="mrow"><div class="mri" style="background:#1D9E75;"></div><div class="mrb" style="width:55%;background:rgba(29,158,117,0.11);"></div></div>
+                <div class="mrow"><div class="mri" style="background:#00FFB2; box-shadow:0 0 5px #00FFB2;"></div><div class="mrb" style="background:rgba(0,255,178,0.14);"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pinfo">
+        <div class="gov-badge">⭐ Reconocido por UAESP · Gobierno de Bogotá</div>
+        <div class="ptag">Aplicación Mobile</div>
+        <h3 class="ptitle">App de Reciclaje<br>Asoreamb</h3>
+        <p class="pclient">Asoreamb · Recicladores · Bogotá, Colombia</p>
+        <p class="pdesc">Aplicación móvil que digitalizó los procesos de la organización recicladora Asoreamb. Reconocida oficialmente por la UAESP como caso de innovación tecnológica en el sector ambiental colombiano.</p>
+        <div class="presults">
+          <div class="pr"><div class="prdot"></div>+500 instalaciones en Google Play Store</div>
+          <div class="pr"><div class="prdot"></div>Reconocimiento oficial UAESP — Gobierno Bogotá</div>
+          <div class="pr"><div class="prdot"></div>Digitalización completa de rutas y procesos</div>
+          <div class="pr"><div class="prdot"></div>Primer app mobile del sector reciclaje</div>
+        </div>
+        <div class="plinks"><a href="https://www.uaesp.gov.co/noticias/organizacion-asoreamb-le-apuesta-la-innovacion-aplicacion-reciclaje" target="_blank" class="btnp">Ver nota oficial UAESP →</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Urban & Shop -->
+  <div class="pcard" id="p2">
+    <div class="pinner rev">
+      <div class="pvisual" style="background: linear-gradient(135deg, #06080F, #0D1130, #141A4A);">
+        <div class="pvbg">
+          <div class="mock">
+            <div class="mbar"><div class="md mr"></div><div class="md my"></div><div class="md mg"></div><div class="murl">proyect-urbanshop.netlify.app</div></div>
+            <div class="mbody">
+              <div class="mhero" style="background: linear-gradient(90deg, #1A1F6E, #4D6BFF); box-shadow: 0 0 28px rgba(77,107,255,0.22);"><div class="mhtxt">URBAN & SHOP · ELEGANCIA & ESENCIA</div></div>
+              <div class="mgrid">
+                <div class="mc" style="background:rgba(77,107,255,0.1);border-color:rgba(77,107,255,0.16);"></div>
+                <div class="mc" style="background:rgba(0,212,255,0.06);border-color:rgba(0,212,255,0.1);"></div>
+                <div class="mc" style="background:rgba(77,107,255,0.1);border-color:rgba(77,107,255,0.16);"></div>
+                <div class="mc" style="background:rgba(0,212,255,0.06);border-color:rgba(0,212,255,0.1);"></div>
+                <div class="mc" style="background:rgba(77,107,255,0.1);border-color:rgba(77,107,255,0.16);"></div>
+                <div class="mc" style="background:rgba(0,212,255,0.06);border-color:rgba(0,212,255,0.1);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pinfo">
+        <div class="ptag">E-commerce · Marketplace</div>
+        <h3 class="ptitle">Urban & Shop<br>Tienda Online</h3>
+        <p class="pclient">Urban & Shop · Moda Urbana Sostenible · Colombia</p>
+        <p class="pdesc">Desarrollo completo de tienda online para marca de moda urbana con ropa reciclada. Catálogo, carrito de compras, blog y sistema de pedidos con diseño centrado en identidad de marca.</p>
+        <div class="presults">
+          <div class="pr"><div class="prdot"></div>Tienda online con carrito de compras funcional</div>
+          <div class="pr"><div class="prdot"></div>5 secciones: Inicio, Tienda, Nosotros, Blog, Contacto</div>
+          <div class="pr"><div class="prdot"></div>Diseño responsive — mobile y desktop optimizado</div>
+          <div class="pr"><div class="prdot"></div>Identidad visual alineada con valores de sostenibilidad</div>
+        </div>
+        <div class="plinks"><a href="https://proyect-urbanshop.netlify.app/" target="_blank" class="btnp">Ver proyecto en vivo →</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MindBringe -->
+  <div class="pcard" id="p3">
+    <div class="pinner">
+      <div class="pvisual" style="background: linear-gradient(135deg, #050A12, #0A1520, #0D2035);">
+        <div class="pvbg">
+          <div class="mock">
+            <div class="mbar"><div class="md mr"></div><div class="md my"></div><div class="md mg"></div><div class="murl">proyect-mindbringe.netlify.app</div></div>
+            <div class="mbody">
+              <div class="mhero" style="background: linear-gradient(90deg, #05183A, #0A4080); box-shadow: 0 0 28px rgba(10,64,128,0.3);"><div class="mhtxt">MINDBRINGE · PLATAFORMA DIGITAL</div></div>
+              <div class="mgrid">
+                <div class="mc" style="background:rgba(0,100,255,0.1);border-color:rgba(0,100,255,0.15);"></div>
+                <div class="mc" style="background:rgba(0,180,255,0.07);border-color:rgba(0,180,255,0.1);"></div>
+                <div class="mc" style="background:rgba(0,100,255,0.1);border-color:rgba(0,100,255,0.15);"></div>
+              </div>
+              <div class="mrows">
+                <div class="mrow"><div class="mri" style="background:#0A7AFF;"></div><div class="mrb" style="width:80%;background:rgba(10,122,255,0.12);"></div></div>
+                <div class="mrow"><div class="mri" style="background:#00B4FF;"></div><div class="mrb" style="width:60%;background:rgba(0,180,255,0.1);"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pinfo">
+        <div class="ptag">Landing Page · Web App</div>
+        <h3 class="ptitle">MindBringe<br>Plataforma Digital</h3>
+        <p class="pclient">MindBringe · Plataforma · Colombia</p>
+        <p class="pdesc">Desarrollo de landing page y plataforma digital para MindBringe. Diseño moderno centrado en conversión, experiencia de usuario optimizada y arquitectura escalable.</p>
+        <div class="presults">
+          <div class="pr"><div class="prdot"></div>Landing page de alta conversión</div>
+          <div class="pr"><div class="prdot"></div>Diseño UX/UI centrado en el usuario</div>
+          <div class="pr"><div class="prdot"></div>Arquitectura escalable y mantenible</div>
+          <div class="pr"><div class="prdot"></div>Performance optimizado para todos los dispositivos</div>
+        </div>
+        <div class="plinks"><a href="https://proyect-mindbringe.netlify.app/" target="_blank" class="btnp">Ver proyecto en vivo →</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wulf Games -->
+  <div class="pcard" id="p4">
+    <div class="pinner rev">
+      <div class="pvisual" style="background: linear-gradient(135deg, #080510, #120820, #1A0A30);">
+        <div class="pvbg">
+          <div class="mock">
+            <div class="mbar"><div class="md mr"></div><div class="md my"></div><div class="md mg"></div><div class="murl">wulfgame-english-landingpage.webflow.io</div></div>
+            <div class="mbody">
+              <div class="mhero" style="background: linear-gradient(90deg, #1A0A30, #6B21A8); box-shadow: 0 0 28px rgba(107,33,168,0.3);"><div class="mhtxt">WULF GAMES · GAMING PLATFORM</div></div>
+              <div class="mgrid">
+                <div class="mc" style="background:rgba(139,92,246,0.12);border-color:rgba(139,92,246,0.18);"></div>
+                <div class="mc" style="background:rgba(168,85,247,0.08);border-color:rgba(168,85,247,0.12);"></div>
+                <div class="mc" style="background:rgba(139,92,246,0.12);border-color:rgba(139,92,246,0.18);"></div>
+              </div>
+              <div class="mrows">
+                <div class="mrow"><div class="mri" style="background:#8B5CF6; box-shadow:0 0 4px #8B5CF6;"></div><div class="mrb" style="width:75%;background:rgba(139,92,246,0.14);"></div></div>
+                <div class="mrow"><div class="mri" style="background:#A855F7;"></div><div class="mrb" style="width:50%;background:rgba(168,85,247,0.1);"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pinfo">
+        <div class="ptag">Landing Page · Gaming</div>
+        <h3 class="ptitle">Wulf Games<br>Gaming Platform</h3>
+        <p class="pclient">Wulf Games · Gaming · Florida, USA</p>
+        <p class="pdesc">Landing page para plataforma de gaming desarrollada en Webflow. Diseño inmersivo orientado a la audiencia gamer con animaciones, call-to-actions estratégicos y experiencia visual de alto impacto.</p>
+        <div class="presults">
+          <div class="pr"><div class="prdot"></div>Landing page en inglés para mercado USA</div>
+          <div class="pr"><div class="prdot"></div>Desarrollada en Webflow con diseño premium</div>
+          <div class="pr"><div class="prdot"></div>Experiencia visual inmersiva para audiencia gamer</div>
+          <div class="pr"><div class="prdot"></div>Primer proyecto con alcance internacional</div>
+        </div>
+        <div class="plinks"><a href="https://wulfgame-english-landingpage.webflow.io/" target="_blank" class="btnp">Ver proyecto en vivo →</a></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<div class="gdiv"></div>
+
+<!-- SERVICIOS -->
+<section class="svc-sec" id="servicios">
+  <div class="sec-eyebrow">Lo que construimos</div>
+  <h2 class="sec-title">Servicios <span>Dreamtech</span></h2>
+  <p class="sec-desc">Cada solución viene con roadmap, documentación y seguimiento. No entregamos y desaparecemos.</p>
+  <div class="sgrid">
+    <div class="scard"><div class="sicon">🌐</div><div class="sname">Página Web Profesional</div><div class="sdesc">Tu casa en internet. Diseño centrado en el usuario, optimizada para SEO y lista para crecer.</div><div class="sprice">Desde $900.000</div><a href="https://wa.link/v4dh9e" class="slink">Solicitar →</a></div>
+    <div class="scard"><div class="sicon">🛒</div><div class="sname">Marketplace con Inventario</div><div class="sdesc">Tienda online completa con catálogo, carrito de compras y pasarela de pagos integrada.</div><div class="sprice">Desde $1.400.000</div><a href="https://wa.link/v4dh9e" class="slink">Solicitar →</a></div>
+    <div class="scard"><div class="sicon">📍</div><div class="sname">Google My Business</div><div class="sdesc">Optimización y gestión de tu perfil en Google Maps. Que los clientes te encuentren primero.</div><div class="sprice">Desde $350.000</div><a href="https://wa.link/v4dh9e" class="slink">Solicitar →</a></div>
+    <div class="scard"><div class="sicon">💬</div><div class="sname">WhatsApp Business</div><div class="sdesc">Canal de ventas profesional con automatizaciones, catálogo integrado y estrategia de contenido.</div><div class="sprice">Desde $350.000</div><a href="https://wa.link/v4dh9e" class="slink">Solicitar →</a></div>
+    <div class="scard"><div class="sicon">🤖</div><div class="sname">Agentes de IA</div><div class="sdesc">Automatización inteligente de procesos empresariales con modelos de inteligencia artificial.</div><div class="sprice">Precio según proyecto</div><a href="https://wa.link/v4dh9e" class="slink">Solicitar →</a></div>
+    <div class="scard"><div class="sicon">📱</div><div class="sname">Aplicaciones Mobile</div><div class="sdesc">Apps que digitalizan y escalan los procesos de tu negocio. Android e iOS con UX real.</div><div class="sprice">Precio según proyecto</div><a href="https://wa.link/v4dh9e" class="slink">Solicitar →</a></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec" id="contacto">
+  <div class="cta-glow"></div>
+  <h2 class="cta-title">¿Listo para construir<br>tu <span>presencia digital?</span></h2>
+  <p class="cta-sub">Empezamos con un diagnóstico de tu negocio. Sin tecnicismos, sin compromisos. Solo estrategia real.</p>
+  <div class="cta-btns">
+    <a href="https://wa.link/v4dh9e" target="_blank" class="btn-primary">💬 Escribir por WhatsApp</a>
+    <a href="mailto:alvaroalfonsodev@gmail.com" class="btn-ghost">📧 Enviar email</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="fbrand">Dream<span>tech</span>.software</div>
+    <div class="ftagline">Construimos tu presencia. Tú construyes tu negocio.</div>
+  </div>
+  <div class="fcopy">© 2025 Dreamtech.software<br>Todos los derechos reservados</div>
+  <div class="fcontact">
+    <div>Álvaro Andrés Alfonso — <strong>AlvaroAlfonsoDev</strong></div>
+    <div>+57 315 815 4139 · +57 315 928 1379</div>
+    <div><a href="mailto:alvaroalfonsodev@gmail.com">alvaroalfonsodev@gmail.com</a></div>
+    <div>Calle 2 # 30-74 · Villavicencio, Meta</div>
+  </div>
+</footer>
+
+<script>
+  // ── Animated counter ──
+  function animateCounter(el, target, suffix, duration = 1800) {
+    let start = 0;
+    const step = target / (duration / 16);
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= target) { start = target; clearInterval(timer); }
+      el.textContent = Math.floor(start) + suffix;
+    }, 16);
+  }
+
+  // ── Intersection observer for stats ──
+  let statsTriggered = false;
+  const statsObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !statsTriggered) {
+        statsTriggered = true;
+        document.querySelectorAll('.stat-num[data-target]').forEach(el => {
+          const target = parseInt(el.dataset.target);
+          const suffix = el.dataset.suffix || '';
+          animateCounter(el, target, suffix);
+        });
+      }
+    });
+  }, { threshold: 0.5 });
+
+  const statsEl = document.getElementById('stats');
+  if (statsEl) statsObs.observe(statsEl);
+
+  // ── Intersection observer for project cards ──
+  const cardObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.pcard').forEach(p => cardObs.observe(p));
+</script>
+
+</body>
+</html>

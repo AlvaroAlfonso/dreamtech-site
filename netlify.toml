@@ -1,0 +1,22 @@
+[[redirects]]
+  from = "/servicios"
+  to = "/servicios.html"
+  status = 200
+
+[[redirects]]
+  from = "/portafolio"
+  to = "/portafolio.html"
+  status = 200
+
+[[redirects]]
+  from = "/servicios/"
+  to = "/servicios.html"
+  status = 200
+
+[[redirects]]
+  from = "/portafolio/"
+  to = "/portafolio.html"
+  status = 200
+
+[build]
+  publish = "."

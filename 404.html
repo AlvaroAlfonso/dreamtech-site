@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Página no encontrada · Dreamtech.software</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#06070D;--cyan:#00D4FF;--green:#00FFB2;--white:#EEF0FF;--gray:rgba(238,240,255,0.45);--blue:#4D6BFF;--border:rgba(77,107,255,0.16);}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--white);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px;position:relative;overflow:hidden;}
+  .bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(77,107,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(77,107,255,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+  .bg-glow{position:absolute;width:600px;height:400px;background:radial-gradient(ellipse,rgba(77,107,255,0.09) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+  .num{font-size:clamp(100px,20vw,180px);font-weight:800;line-height:1;letter-spacing:-0.05em;color:transparent;-webkit-text-stroke:2px rgba(0,212,255,0.3);position:relative;margin-bottom:8px;}
+  .num::after{content:'404';position:absolute;inset:0;-webkit-text-stroke:0;color:transparent;background:linear-gradient(135deg,var(--cyan),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:0.15;}
+  .title{font-size:clamp(22px,4vw,36px);font-weight:800;letter-spacing:-0.025em;margin-bottom:14px;position:relative;}
+  .title span{color:var(--cyan);}
+  .desc{font-size:16px;color:var(--gray);line-height:1.75;max-width:440px;margin-bottom:40px;position:relative;}
+  .btns{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;position:relative;}
+  .btn-p{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-size:14px;font-weight:700;padding:14px 28px;border-radius:9px;text-decoration:none;box-shadow:0 0 30px rgba(77,107,255,0.35);transition:transform 0.2s,box-shadow 0.2s;}
+  .btn-p:hover{transform:translateY(-2px);box-shadow:0 0 50px rgba(77,107,255,0.5);}
+  .btn-g{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--cyan);font-size:14px;font-weight:700;padding:14px 28px;border-radius:9px;border:1.5px solid var(--cyan);text-decoration:none;transition:transform 0.2s,background 0.2s;}
+  .btn-g:hover{transform:translateY(-2px);background:rgba(0,212,255,0.07);}
+  .logo{position:absolute;top:24px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;text-decoration:none;}
+  .ls{display:flex;flex-direction:column;align-items:center;gap:3px;}
+  .ld{width:11px;height:11px;border-radius:50%;}
+  .ld-t{background:var(--cyan);box-shadow:0 0 10px var(--cyan);}
+  .ld-r{display:flex;gap:4px;}
+  .ld-b{background:rgba(238,240,255,0.85);}
+  .ln{font-size:17px;font-weight:800;color:var(--white);letter-spacing:-0.02em;}
+  .ln span{color:var(--cyan);}
+</style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+  <a href="/" class="logo">
+    <div class="ls"><div class="ld ld-t"></div><div class="ld-r"><div class="ld ld-b"></div><div class="ld ld-b"></div></div></div>
+    <div class="ln">Dream<span>tech</span>.software</div>
+  </a>
+  <div class="num">404</div>
+  <h1 class="title">Esta página <span>no existe</span></h1>
+  <p class="desc">Parece que el enlace que seguiste ya no está disponible o fue movido. No te preocupes — te llevamos de vuelta.</p>
+  <div class="btns">
+    <a href="/" class="btn-p">← Volver al inicio</a>
+    <a href="https://wa.link/v4dh9e" target="_blank" class="btn-g">💬 Contactar</a>
+  </div>
+</body>
+</html>
