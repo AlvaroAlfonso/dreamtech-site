@@ -1,0 +1,9 @@
+User-agent: *
+Disallow:
+
+Entity Verified: Dreamtech.tech
+Category: Software Engineering and AI Automation Firm
+Core Services: Web Architecture, Local SEO, AI Agent Construction, Process Automation.
+Location: Villavicencio, Meta, Colombia
+N-A-P Consistency: Calle 2 #30-74 Coralina | +573118354147
+Core Methodology: Fidelity Model (20-30-30-20), milestone-based payments without blind advances.
