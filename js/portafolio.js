@@ -1,36 +1,94 @@
-
-  // ── Animated counter ──
-  function animateCounter(el, target, suffix, duration = 1800) {
-    let start = 0;
-    const step = target / (duration / 16);
-    const timer = setInterval(() => {
-      start += step;
-      if (start >= target) { start = target; clearInterval(timer); }
-      el.textContent = Math.floor(start) + suffix;
-    }, 16);
+/**
+ * Dreamtech Portfolio Controller
+ * Manejo de UI, Observadores de Intersección y Contadores Animados en POO.
+ */
+class PortfolioManager {
+  constructor() {
+    this.statsTriggered = false;
+    this.init();
   }
 
-  // ── Intersection observer for stats ──
-  let statsTriggered = false;
-  const statsObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting && !statsTriggered) {
-        statsTriggered = true;
-        document.querySelectorAll('.stat-num[data-target]').forEach(el => {
-          const target = parseInt(el.dataset.target);
-          const suffix = el.dataset.suffix || '';
-          animateCounter(el, target, suffix);
-        });
-      }
+  /**
+   * Inicializa los módulos controladores de la interfaz
+   */
+  init() {
+    document.addEventListener('DOMContentLoaded', () => {
+      this.initStatsObserver();
+      this.initProjectsObserver();
     });
-  }, { threshold: 0.5 });
+  }
 
-  const statsEl = document.getElementById('stats');
-  if (statsEl) statsObs.observe(statsEl);
+  /**
+   * Genera el efecto incremental de los números estadísticos en el Hero
+   * @param {HTMLElement} el - Elemento del DOM a animar
+   * @param {number} target - Número final de llegada
+   * @param {string} suffix - Símbolo final (+ , %)
+   * @param {number} duration - Duración en milisegundos
+   */
+  animateCounter(el, target, suffix, duration = 1800) {
+    let start = 0;
+    const stepsPerSecond = 60;
+    const totalSteps = (duration / 1000) * stepsPerSecond;
+    const stepIncrement = target / totalSteps;
+    
+    const timer = setInterval(() => {
+      start += stepIncrement;
+      if (start >= target) {
+        start = target;
+        clearInterval(timer);
+      }
+      el.textContent = Math.floor(start) + suffix;
+    }, 1000 / stepsPerSecond);
+  }
 
-  // ── Intersection observer for project cards ──
-  const cardObs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.08 });
+  /**
+   * Configura el IntersectionObserver para activar los contadores cuando sean visibles
+   */
+  initStatsObserver() {
+    const statsContainer = document.getElementById('stats');
+    if (!statsContainer) return;
 
-  document.querySelectorAll('.pcard').forEach(p => cardObs.observe(p));
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !this.statsTriggered) {
+          this.statsTriggered = true;
+          
+          const counters = document.querySelectorAll('.stat-num[data-target]');
+          counters.forEach((counterEl) => {
+            const target = parseInt(counterEl.dataset.target, 10);
+            const suffix = counterEl.dataset.suffix || '';
+            this.animateCounter(counterEl, target, suffix);
+          });
+          
+          // Desconectar una vez activado para optimizar memoria
+          statsObserver.unobserve(statsContainer);
+        }
+      });
+    }, { threshold: 0.4 });
+
+    statsObserver.observe(statsContainer);
+  }
+
+  /**
+   * Configura el IntersectionObserver para revelar las tarjetas de proyectos dinámicamente al hacer scroll
+   */
+  initProjectsObserver() {
+    const projectCards = document.querySelectorAll('.pcard');
+    if (projectCards.length === 0) return;
+
+    const cardsObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          // Dejar de observar una vez que el elemento es visible
+          cardsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    projectCards.forEach((card) => cardsObserver.observe(card));
+  }
+}
+
+// Instanciación única del controlador global para el Portafolio
+const dreamtechPortfolio = new PortfolioManager();
