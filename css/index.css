@@ -1,3 +1,4 @@
+/* REEMPLAZA ESTE BLOQUE EN EL INICIO DE TU CSS */
 :root {
   --bg: #06070D;
   --bg2: #0A0C18;
@@ -6,8 +7,11 @@
   --cyan: #00D4FF;
   --green: #00FFB2;
   --white: #EEF0FF;
-  --gray: rgba(238,240,255,0.45);
-  --gray2: rgba(238,240,255,0.28);
+  
+  /* MEJORA DE CONTRASTE: Grises premium con excelente legibilidad en pantallas AMOLED/OLED */
+  --gray: #ced4f0;   /* Párrafos, subtítulos y descripciones principales */
+  --gray2: #bbbec7;  /* Enlaces del navbar sin hover, labels secundarios y textos pequeños */
+  
   --border: rgba(77,107,255,0.16);
   --border-c: rgba(0,212,255,0.22);
 }
@@ -1440,12 +1444,25 @@ nav {
   }
 }
 
-/* ── MOBILE ── */
+/* BUSCA TU BLOQUE FINAL @media(max-width: 1000px) Y ACTUALIZA ESTA SECCIÓN: */
 @media(max-width: 1000px) {
   nav { padding: 16px 20px; }
   nav.scrolled { padding: 12px 20px; }
-  .nav-links { display: none; }
-  .nav-mobile { display: block; }
+  
+  /* CORRECCIÓN: Evitamos que oculte la lista si el menú premium móvil está abierto */
+  .nav-links:not(.is-open) { 
+    display: none; 
+  }
+  
+  /* Forzamos que si tiene .is-open, use flex y no herede el display: none */
+  .nav-links.is-open {
+    display: flex !important;
+  }
+
+  /* Eliminamos el display: block de la clase vieja para que no choque con el .nav-toggle */
+  .nav-mobile { display: none !important; }
+  
+  /* El resto de tus componentes se mantienen idénticos y limpios */
   .hero { grid-template-columns: 1fr; padding: 110px 20px 60px; gap: 40px; }
   .hero-right { display: none; }
   .hero-stats { grid-template-columns: repeat(2, 1fr); }
