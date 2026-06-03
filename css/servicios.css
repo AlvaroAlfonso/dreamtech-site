@@ -1,20 +1,16 @@
-/* REEMPLAZA ESTE BLOQUE EN EL INICIO DE TU CSS */
 :root {
   --bg: #06070D;
   --bg2: #0A0C18;
-  --bg3: #0E1022;
-  --blue: #4D6BFF;
-  --cyan: #00D4FF;
-  --green: #00FFB2;
+  --bg3: #0E1020;
+  --neon-blue: #4D6BFF;
+  --neon-cyan: #00D4FF;
+  --green-neon: #00FFB2;
   --white: #EEF0FF;
-  
-  /* MEJORA DE CONTRASTE: Grises premium con excelente legibilidad en pantallas AMOLED/OLED */
-  --gray: #ced4f0;   /* Párrafos, subtítulos y descripciones principales */
-  --gray2: #bbbec7;  /* Enlaces del navbar sin hover, labels secundarios y textos pequeños */
-  
+  --gray: rgba(238,240,255,0.45);
   --border: rgba(77,107,255,0.16);
-  --border-c: rgba(0,212,255,0.22);
+  --border-cyan: rgba(0,212,255,0.25);
 }
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -1090,4 +1086,3 @@ footer {
     gap: 20px;
   }
 }
-
