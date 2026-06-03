@@ -50,7 +50,7 @@ nav {
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border-bottom: 1px solid var(--border);
-  width: 90%;
+  width: 80%;
 }
 
 .logo {
