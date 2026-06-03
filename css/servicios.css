@@ -1060,4 +1060,34 @@ footer {
   }
 }
 
+@media (max-width: 768px) {
+  .svc-header, .svc-header.reverse {
+    grid-template-columns: 1fr;
+    direction: ltr;
+    padding: 48px 0;
+  }
+  .svc-header.reverse > * {
+    direction: ltr;
+  }
+  .svc-visual {
+    height: 260px;
+    order: -1; /* Mantiene la consistencia visual: primero el mockup, luego el texto en móviles */
+  }
+  .items-list {
+    grid-template-columns: 1fr; /* Lista de 1 sola columna en dispositivos compactos */
+  }
+  .cta-sec {
+    padding: 80px 20px;
+  }
+  .cta-alts {
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+  }
+  footer {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+}
 
