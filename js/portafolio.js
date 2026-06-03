@@ -1,6 +1,6 @@
 /**
  * Dreamtech Portfolio Controller
- * Manejo de UI, Observadores de Intersección y Contadores Animados en POO.
+ * Manejo de UI, Navbar Responsivo, Observadores de Intersección y Contadores Animados en POO.
  */
 class PortfolioManager {
   constructor() {
@@ -13,8 +13,53 @@ class PortfolioManager {
    */
   init() {
     document.addEventListener('DOMContentLoaded', () => {
+      this.initNavbarController();
       this.initStatsObserver();
       this.initProjectsObserver();
+    });
+  }
+
+  /**
+   * Controlador del Navbar Móvil y Gestión de Estados Interactivos
+   */
+  initNavbarController() {
+    const toggleBtn = document.getElementById('navToggle');
+    const menuLinks = document.getElementById('navMenu');
+    const body = document.body;
+
+    if (!toggleBtn || !menuLinks) return;
+
+    // Función unificada para alternar el estado del menú
+    const toggleMenu = () => {
+      const isOpen = menuLinks.classList.toggle('is-open');
+      toggleBtn.classList.toggle('is-active');
+      body.classList.toggle('menu-is-open');
+      
+      // Actualización de atributos dinámicos de accesibilidad (A11Y)
+      toggleBtn.setAttribute('aria-expanded', isOpen);
+    };
+
+    // Evento de apertura/cierre al presionar el botón hamburguesa
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    // Cerrar el menú automáticamente al hacer clic en cualquier enlace interno
+    const navItems = menuLinks.querySelectorAll('a:not(.nav-btn)');
+    navItems.forEach(link => {
+      link.addEventListener('click', () => {
+        if (menuLinks.classList.contains('is-open')) {
+          toggleMenu();
+        }
+      });
+    });
+
+    // Cerrar de forma segura si el usuario hace clic fuera del área del menú
+    document.addEventListener('click', (e) => {
+      if (menuLinks.classList.contains('is-open') && !menuLinks.contains(e.target) && !toggleBtn.contains(e.target)) {
+        toggleMenu();
+      }
     });
   }
 
