@@ -80,3 +80,53 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const navToggle = document.getElementById('navToggle');
+  const navMenu = document.getElementById('navMenu');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const body = document.body;
+
+  // Función Central para Alternar Menú
+  const toggleMenu = () => {
+    const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+    
+    // Cambiar estados lógicos (A11y)
+    navToggle.setAttribute('aria-expanded', !isExpanded);
+    navMenu.setAttribute('aria-hidden', isExpanded);
+    
+    // Alternar clases CSS para transiciones visuales
+    navMenu.classList.toggle('is-open', !isExpanded);
+    body.classList.toggle('nav-lock-scroll', !isExpanded);
+  };
+
+  // Función Segura para Cerrar el Menú
+  const closeMenu = () => {
+    navToggle.setAttribute('aria-expanded', 'false');
+    navMenu.setAttribute('aria-hidden', 'true');
+    navMenu.classList.remove('is-open');
+    body.classList.remove('nav-lock-scroll');
+  };
+
+  // Listeners de Eventos
+  if (navToggle && navMenu) {
+    navToggle.addEventListener('click', toggleMenu);
+    
+    // Cerrar el menú automáticamente al hacer clic en un enlace (In-page navigation UX)
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        // Solo ejecuta el cierre si el menú móvil está activo actualmente
+        if (window.innerWidth <= 1024) {
+          closeMenu();
+        }
+      });
+    });
+
+    // Control de reseteo por si el usuario rota o cambia el tamaño de pantalla de móvil a PC
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 1024) {
+        closeMenu();
+      }
+    }, { passive: true });
+  }
+});
