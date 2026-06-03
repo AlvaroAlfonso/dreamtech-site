@@ -77,4 +77,40 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   });
+  // 4. CONTROL DEL NAVBAR MOBILE RESPONSIVE (IGUAL A INDEX.HTML)
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links.mobile-menu');
+  const body = document.body;
+
+  if (navToggle && navLinks) {
+    // Alternar menú al presionar el botón hamburguesa
+    navToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = navToggle.classList.toggle('active');
+      navLinks.classList.toggle('active', isOpen);
+      body.classList.toggle('menu-open', isOpen);
+      navToggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Cerrar el menú automáticamente al hacer clic en cualquier enlace
+    const menuItems = navLinks.querySelectorAll('a');
+    menuItems.forEach(item => {
+      item.addEventListener('click', () => {
+        navToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+        body.classList.remove('menu-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Cerrar el menú si se hace clic por fuera de la cortina flotante
+    document.addEventListener('click', (e) => {
+      if (navLinks.classList.contains('active') && !navLinks.contains(e.target) && !navToggle.contains(e.target)) {
+        navToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+        body.classList.remove('menu-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
 });
