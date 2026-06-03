@@ -242,7 +242,7 @@ body.menu-is-open {
   nav { 
     padding: 16px 20px; 
     position: fixed;
-    width: 100%;
+    width: 80%;
   }
 
   /* Activación de la visualización del botón hamburguesa */
